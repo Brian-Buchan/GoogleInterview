@@ -11,10 +11,55 @@ namespace GoogleInterview
     {
         static void Main(string[] args)
         {
+            #region UserStringInput
+            int stringAsize = 0;
+            int stringBsize = 0;
+            // Question one jump incase of error entering list length
+            Q1:
+            Console.WriteLine("How many words in your first list?");
+            try
+            {
+                stringAsize = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception caught! Please enter a digit \nPress any key to continue");
+                Console.ReadLine();
+                Console.Clear();
+                goto Q1;
+            }
+            string[] Astring = new string[stringAsize];
+            addWord(Astring);
+            Console.Clear();
+
+            // Question 2 jump incase of error entering list length
+            Q2:
+            Console.WriteLine("How many words in your second list?");
+            try
+            {
+                stringBsize = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception caught! Please enter a digit \nPress any key to continue");
+                Console.ReadLine();
+                Console.Clear();
+                goto Q2;
+            }
+            string[] Bstring = new string[stringBsize];
+            addWord(Bstring);
+            Console.Clear();
+
+            printArray(Astring);
+            printArray(Bstring);
+
+            #endregion
+
+
             // TODO: Allow for user to input strings themself
-            string[] Astring = { "Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "Morbi", "ultricies", "leo", "nec", "aliquam", "fermentum", "Sed", "commodo", "faucibus", "lectus", "facilisis", "feugiat", "Sed", "id", "condimentum", "lectus", "eget" };
-            string[] Bstring = { "In", "hac", "habitasse", "platea", "dictumst", "Mauris", "scelerisque", "arcu", "in", "ligula", "tristique", "imperdiet", "Duis", "id", "dui", "a", "diam" };
-            // Arrays are type safe so we cannot set a string[] = int[]
+            //string[] Astring = { "Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "Morbi", "ultricies", "leo", "nec", "aliquam", "fermentum", "Sed", "commodo", "faucibus", "lectus", "facilisis", "feugiat", "Sed", "id", "condimentum", "lectus", "eget" };
+            //string[] Bstring = { "In", "hac", "habitasse", "platea", "dictumst", "Mauris", "scelerisque", "arcu", "in", "ligula", "tristique", "imperdiet", "Duis", "id", "dui", "a", "diam" };
+            //// Arrays are type safe so we cannot set a string[] = int[]
             // Lists can overcome this but may add more overhead than creating 2 extra arrays
             int[] Aint = new int[Astring.Length];
             int[] Bint = new int[Bstring.Length];
@@ -56,6 +101,15 @@ namespace GoogleInterview
                 Console.WriteLine("There are " + Bint[i] + " strings in A smaller than this B");
             }
             Console.ReadKey();
+        }
+
+        static void addWord(string[] array)
+        {
+            for (int x = 0; x < array.Length; x++)
+            {
+                Console.WriteLine("Please enter a word for your list.");
+                array[x] = Console.ReadLine();
+            }
         }
 
         static int GetCountOfSmaller_As(int[] Aint, int[] Bint, ref int AintIndex, int BintIndex)
@@ -115,6 +169,17 @@ namespace GoogleInterview
                 }
             }
             return output;
+        }
+
+        static void printArray(string[] array)
+        {
+            Console.WriteLine("This list contains the words:");
+            for (int x = 0; x < array.Length; x++)
+            {
+                Console.Write(array[x] + ", ");
+            }
+            Console.WriteLine("\n");
+
         }
     }
 }
